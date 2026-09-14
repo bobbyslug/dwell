@@ -79,14 +79,14 @@
           <input type="text" id="prompt" bind:value={avoidanceText} />
         </div>
         <div class="row">
-          <div>Go back to living?</div>
+          <div>Face the discomfort?</div>
           <Button
             id="pausedSuccessfullyButton"
             variant={pausedSuccessfully ? "positive" : "negative"}
             onclick={() => (pausedSuccessfully = !pausedSuccessfully)}
           >
             {pausedSuccessfully
-              ? "I will go touch grass :)"
+              ? "Yes, I am back in control :)"
               : "Too drained at the moment :("}
           </Button>
         </div>
@@ -102,7 +102,7 @@
       disabled={submitDisabled}>Submit</Button
     >
     <Button variant="neutral" onclick={() => goto("/history")}
-      >View Avoidance History</Button
+      >View History</Button
     >
   {:else if step === "DONE"}
     <p>Carry on</p>

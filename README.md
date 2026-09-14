@@ -1,7 +1,8 @@
-an attempt at a low friction digital intervention tool 
+An attempt at making a low-friction digital intervention tool.
 
-start a development server:
+For the best experience, set this page as your default new tab URL by downloading a New Tab Redirect browser extension (Chromium) or find it in your browser settings if available.
 
+Start a development server:
 ```sh
 npm run dev
 

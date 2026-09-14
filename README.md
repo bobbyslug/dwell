@@ -5,7 +5,7 @@ A low-friction digital intervention tool.
 For the intended experience, set this page as your default new tab URL by downloading a New Tab Redirect browser extension (Chromium), or finding it in your browser settings if available.
 
 Setup:
-Start a development server:
+Start a development server
 ```sh
 npm run dev
 

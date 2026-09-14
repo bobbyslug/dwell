@@ -1,0 +1,50 @@
+:root {
+  /* base */
+  --color-bg: #f5f1e8; /* warm cream */
+  --color-surface: #ebe3d4; /* slightly deeper */
+  --color-text: #3e3226; /* warm dark brown */
+  --color-text-muted: #8c7b6b; /* soft taupe */
+  --color-border: #d8cbb8; /* subtle tan */
+
+  /* accents */
+  --color-positive: #7a8b69; /* muted sage green */
+  --color-negative: #b5654a; /* soft terracotta */
+  --color-neutral: #a89c8a;
+  --color-selected: #c98a3b; /* warm mustard */
+
+  --space-sm: 6px;
+  --space-m: 12px;
+  --space-l: 18px;
+  --font-size-base: 1.25rem;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  gap: var(--space-sm);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.section {
+  margin: var(--space-m);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+}

@@ -1,8 +1,32 @@
 <script lang="ts">
   import Button from "$lib/components/Button.svelte";
   import List from "$lib/components/List.svelte";
+  import { invalidateAll } from "$app/navigation";
+  import { Toaster, toast } from "svelte-sonner";
   let { data } = $props();
+
+  async function resetDb() {
+    if (!confirm("Delete all history? This action can't be undone.")) return;
+
+    try {
+      const res = await fetch("/api/history/clear", { method: "POST" });
+      if (!res.ok) {
+        toast("Could't clear history.");
+        return;
+      }
+
+      const { rowsDeleted } = await res.json();
+      toast.success(
+        `${rowsDeleted} ${rowsDeleted === 1 ? "entry" : "entries"} removed.`,
+      );
+      await invalidateAll();
+    } catch {
+      toast.error("Couldn't reach the server.");
+    }
+  }
 </script>
+
+<Toaster richColors />
 
 {#snippet avoidanceRow(avoidance)}
   <div>
@@ -26,8 +50,10 @@
       footer={data.fail.length}
     />
   </div>
-  <div>feature idea: weekly/daily trends</div>
-  <Button bg="gray" onclick={() => history.back()}>Back</Button>
+  <div class="row">
+    <Button bg="gray" onclick={() => history.back()}>Back</Button>
+    <Button bg="gray" onclick={() => resetDb()}>Clear History</Button>
+  </div>
 </div>
 
 <style>

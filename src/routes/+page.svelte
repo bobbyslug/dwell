@@ -11,10 +11,10 @@
   let intentOptions = ["Question", "Distraction", "Task", "Fun"];
   let selectedIntent: string | null = $state(null);
 
-  let avoidanceText = $state("");
+  let avoiding = $state("");
   let pausedSuccessfully = $state(true);
   let submitDisabled = $derived(
-    selectedIntent === "Distraction" && !avoidanceText.trim(),
+    selectedIntent === "Distraction" && !avoiding.trim(),
   );
 
   async function saveAvoidance() {
@@ -23,7 +23,7 @@
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
         intention: selectedIntent,
-        text: avoidanceText,
+        text: avoiding,
         paused: pausedSuccessfully,
       }),
     });
@@ -76,7 +76,7 @@
       <div class="container section">
         <div>
           <label for="prompt">What are you avoiding?</label>
-          <input type="text" id="prompt" bind:value={avoidanceText} />
+          <input type="text" id="prompt" bind:value={avoiding} />
         </div>
         <div class="row">
           <div>Face the discomfort?</div>

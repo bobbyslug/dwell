@@ -1,7 +1,7 @@
 :root {
   /* base */
-  --color-bg: #f5f1e8; /* warm cream */
-  --color-surface: #ebe3d4; /* slightly deeper */
+  --color-bg: #ece2cf; /* warm cream */
+  --color-surface: #e0d2b9; /* slightly deeper */
   --color-text: #3e3226; /* warm dark brown */
   --color-text-muted: #8c7b6b; /* soft taupe */
   --color-border: #d8cbb8; /* subtle tan */
@@ -12,16 +12,25 @@
   --color-neutral: #a89c8a;
   --color-selected: #c98a3b; /* warm mustard */
 
-  --space-sm: 6px;
-  --space-m: 12px;
-  --space-l: 18px;
-  --font-size-base: 1.25rem;
+  --space-sm: 12px;
+  --space-m: 20px;
+  --space-l: 42px;
 }
 
 body {
+  font-family: "Newsreader", ui-serif, Georgia, serif;
+  font-size: 1.25rem;
   background-color: var(--color-bg);
   color: var(--color-text);
+  margin: 0;
   gap: var(--space-sm);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 .container {
@@ -47,4 +56,5 @@ body {
   display: flex;
   gap: var(--space-sm);
   justify-content: center;
+  align-items: center;
 }

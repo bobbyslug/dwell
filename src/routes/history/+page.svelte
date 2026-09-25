@@ -3,6 +3,7 @@
   import List from "$lib/components/List.svelte";
   import { invalidateAll } from "$app/navigation";
   import { Toaster, toast } from "svelte-sonner";
+  import type { Avoidance } from "$lib/types";
   let { data } = $props();
 
   async function resetDb() {
@@ -27,8 +28,7 @@
 </script>
 
 <Toaster richColors />
-
-{#snippet avoidanceRow(avoidance)}
+{#snippet avoidanceRow(avoidance: Avoidance)}
   <div>
     <div class={avoidance.paused ? "success" : "fail"}>{avoidance.text}</div>
   </div>
@@ -51,8 +51,8 @@
     />
   </div>
   <div class="row">
-    <Button bg="gray" onclick={() => history.back()}>Back</Button>
-    <Button bg="gray" onclick={() => resetDb()}>Clear History</Button>
+    <Button onclick={() => history.back()}>Back</Button>
+    <Button onclick={() => resetDb()}>Clear History</Button>
   </div>
 </div>
 

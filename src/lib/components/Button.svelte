@@ -16,7 +16,33 @@
 
 <style>
   .button {
-    font-size: 0.9rem;
+    --btn-bg: var(--color-neutral);
+    --btn-fg: var(--color-text);
+
+    border: none;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    background-color: var(--btn-bg);
+    color: var(--btn-fg);
+    padding: var(--space-sm);
+    transition:
+      background-color 120ms ease,
+      transform 80ms ease;
+  }
+
+  .button:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--btn-bg) 88%, black);
+  }
+
+  .button:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  .button:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
   }
 
   .button:disabled {
@@ -25,18 +51,16 @@
   }
 
   .button.positive {
-    background-color: var(--color-positive);
+    --btn-bg: var(--color-positive);
+    --btn-fg: var(--color-bg);
   }
 
   .button.negative {
-    background-color: var(--color-negative);
-  }
-
-  .button.neutral {
-    background-color: var(--color-neutral);
+    --btn-bg: var(--color-negative);
+    --btn-fg: var(--color-bg);
   }
 
   .button.selected {
-    background-color: var(--color-selected);
+    --btn-bg: var(--color-selected);
   }
 </style>

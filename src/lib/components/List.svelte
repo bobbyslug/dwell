@@ -6,7 +6,7 @@
   {#if header}
     <h3>{header}</h3>
   {/if}
-  <ul class={["list", isVertical ? "stack" : "row"]} id="list">
+  <ul class={["list", isVertical ? "stack" : "row"]}>
     {#each items as item (item)}
       <li>{@render row(item)}</li>
     {/each}

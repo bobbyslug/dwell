@@ -1,10 +1,8 @@
 <script lang="ts">
   import Button from "$lib/components/Button.svelte";
   import List from "$lib/components/List.svelte";
-  import { goto } from "$app/navigation";
-  import type { Snapshot } from "./$types";
+  import { session } from "$lib/session.svelte.ts";
 
-  let step: "COUNTDOWN" | "SELECT_INTENT" | "DONE" = $state("COUNTDOWN");
   let countdown = $state(3);
   let ready = $derived(countdown <= 0);
 
@@ -27,18 +25,17 @@
         paused: pausedSuccessfully,
       }),
     });
-    step = "DONE";
   }
 
   //Countdown
   $effect(() => {
-    if (step !== "COUNTDOWN") return;
+    if (session.step !== "COUNTDOWN") return;
     const ivl = setInterval(() => {
       countdown -= 1;
 
       if (ready) {
         clearInterval(ivl);
-        step = "SELECT_INTENT";
+        session.step = "SELECT_INTENT";
       }
     }, 1000);
 
@@ -46,16 +43,10 @@
       clearInterval(ivl);
     };
   });
-
-  //Prevent countdown when navigating back to home page
-  export const snapshot: Snapshot<string> = {
-    capture: () => step,
-    restore: (value) => (step = value),
-  };
 </script>
 
 <!--Intent Buttons-->
-{#snippet intentRow(intent)}
+{#snippet intentRow(intent: String)}
   <Button
     variant={selectedIntent === intent ? "selected" : "neutral"}
     onclick={() => (selectedIntent = intent)}>{intent}</Button
@@ -63,9 +54,9 @@
 {/snippet}
 <div class="container">
   <!--Content-->
-  {#if step === "COUNTDOWN"}
+  {#if session.step === "COUNTDOWN"}
     <h1>{countdown}</h1>
-  {:else if step === "SELECT_INTENT"}
+  {:else if session.step === "SELECT_INTENT"}
     <div class="container section">
       <h1>You are the captain now...</h1>
       <div>What is your intention?</div>
@@ -96,20 +87,17 @@
     <Button
       variant="neutral"
       onclick={() => {
-        step = "DONE";
+        session.step = "DONE";
         saveAvoidance();
       }}
       disabled={submitDisabled}>Submit</Button
     >
-    <Button variant="neutral" onclick={() => goto("/history")}
-      >View History</Button
-    >
-  {:else if step === "DONE"}
+  {:else if session.step === "DONE"}
     <p>Carry on</p>
     <Button
       id="backButton"
       variant="neutral"
-      onclick={() => (step = "SELECT_INTENT")}
+      onclick={() => (session.step = "SELECT_INTENT")}
     >
       Back
     </Button>
